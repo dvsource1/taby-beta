@@ -1,26 +1,42 @@
-import logo from "@assets/img/logo.svg";
+import { BeakerIcon } from "@heroicons/react/24/solid";
 import "@pages/popup/Popup.css";
+import _ from "lodash";
 
 const Popup = () => {
+  const closeAll = () => {
+    chrome.tabs.query({}, (tabs) => {
+      _.forEach(tabs, (tab: chrome.tabs.Tab) => {
+        if (tab.active) {
+          chrome.tabs.update(tab.id, { url: "chrome://newtab" });
+        } else {
+          chrome.tabs.remove(tab.id);
+        }
+      });
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="text-3xl text-blue-500 font-bold underline">
-          Hello world!
-        </h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/popup/Popup.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
+    <div className="">
+      <header className="p-2 border-b border-black">
+        <h1 className="text-2xl text-slate-800">Taby</h1>
       </header>
+      <div className="flex h-80">
+        <div className="flex flex-col w-10 px-2 items-center border-r-2 border-black">
+          <button
+            className="px-1 py-0.5 m-1 w-8 h-8 text-slate-800 rounded bg-slate-400"
+            onClick={closeAll}
+          >
+            <BeakerIcon />
+          </button>
+          <button
+            className="px-1 py-0.5 m-1 w-8 h-8 text-slate-800 rounded bg-slate-400"
+            onClick={closeAll}
+          >
+            <BeakerIcon />
+          </button>
+        </div>
+        <main className="w-60"></main>
+      </div>
     </div>
   );
 };
