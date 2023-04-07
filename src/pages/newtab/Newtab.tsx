@@ -1,12 +1,11 @@
-import React from "react";
 import logo from "@assets/img/logo.svg";
 import "@pages/newtab/Newtab.css";
-import "@pages/newtab/Newtab.scss";
 
 const Newtab = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <h1 className="text-3xl font-bold underline mx-5">Hello world!</h1>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/pages/newtab/Newtab.tsx</code> and save to reload.
