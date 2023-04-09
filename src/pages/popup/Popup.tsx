@@ -17,19 +17,19 @@ const Popup = () => {
 
   return (
     <div className="">
-      <header className="p-2 border-b border-black">
+      <header className="border-b border-black p-2">
         <h1 className="text-2xl text-slate-800">Taby</h1>
       </header>
       <div className="flex h-80">
-        <div className="flex flex-col w-10 px-2 items-center border-r-2 border-black">
+        <div className="flex w-10 flex-col items-center border-r-2 border-black px-2">
           <button
-            className="px-1 py-0.5 m-1 w-8 h-8 text-slate-800 rounded bg-slate-400"
+            className="m-1 h-8 w-8 rounded bg-slate-400 px-1 py-0.5 text-slate-800"
             onClick={closeAll}
           >
             <BeakerIcon />
           </button>
           <button
-            className="px-1 py-0.5 m-1 w-8 h-8 text-slate-800 rounded bg-slate-400"
+            className="m-1 h-8 w-8 rounded bg-slate-400 px-1 py-0.5 text-slate-800"
             onClick={closeAll}
           >
             <BeakerIcon />
