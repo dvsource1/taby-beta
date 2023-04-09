@@ -9,7 +9,7 @@ const Newtab = () => {
   return (
     <div>
       <main
-        className="h-screen w-fit bg-slate-800 py-2"
+        className="h-screen w-fit bg-[#181A20] py-2"
         onScroll={handleScroll}
       >
         <BinanceP2P />

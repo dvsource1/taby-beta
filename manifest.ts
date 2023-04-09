@@ -43,6 +43,7 @@ const manifest: chrome.runtime.ManifestV3 = {
       matches: ["*://*/*"],
     },
   ],
+  permissions: ["system.display"],
 };
 
 export default manifest;

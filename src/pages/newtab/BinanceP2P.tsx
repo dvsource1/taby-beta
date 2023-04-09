@@ -8,6 +8,7 @@ import mapRecord from "./utli";
 type RecordEntry = {
   records: Record[];
   rate: number;
+  price: number;
 };
 const ASSETS = [
   "USDT",
@@ -24,14 +25,22 @@ const ASSETS = [
 const BinanceP2P = () => {
   const [recordsMap, setRecordsMap] = useState(new Map<string, RecordEntry>());
 
-  const _setRecordsMap = (orders: any[], rates: string[] | number[]) => {
+  const _setRecordsMap = (
+    orders: any[],
+    prices: string[] | number[],
+    rates: string[] | number[]
+  ) => {
     const newMap = new Map<string, RecordEntry>();
 
     _.forEach(orders, (order) => {
       const record = mapRecord(order);
       if (!newMap.has(record.asset)) {
         const assetIndex = ASSETS.indexOf(record.asset);
-        newMap.set(record.asset, { rate: +rates[assetIndex], records: [] });
+        newMap.set(record.asset, {
+          price: +prices[assetIndex],
+          rate: +rates[assetIndex],
+          records: [],
+        });
       }
       newMap.get(record.asset).records.push(record);
     });
@@ -59,39 +68,65 @@ const BinanceP2P = () => {
       );
     });
 
-    const rateRequests = ASSETS.filter((asset) => asset !== "USDT").map(
+    const priceRequests = ASSETS.filter((asset) => asset !== "USDT").map(
       (asset) =>
         axios.get(`https://api.binance.com/api/v3/avgPrice?symbol=${asset}USDT`)
     );
 
-    axios.all([...orderRequests, ...rateRequests]).then((responses) => {
-      console.log(responses);
-      const ordersResponses = responses.filter((res) =>
-        _.has(res, "data.data")
-      );
-      const orders = ordersResponses.map((res) => res.data.data);
+    // const rateRequests = ASSETS.map((asset) =>
+    //   axios.get(
+    //     `https://rest.coinapi.io/v1/exchangerate/${asset}/USD?apiKey=${COIN_API}`
+    //   )
+    // );
 
-      const rateResponses = responses.filter((res) => _.has(res, "data.price"));
-      const rates = rateResponses.map((res) => res.data.price);
-      _setRecordsMap(_.flatten(orders), [1, ...rates]);
-    });
+    axios
+      .all([...orderRequests, ...priceRequests /*, ...rateRequests*/])
+      .then((responses) => {
+        console.log(responses);
+        const ordersResponses = responses.filter((res) =>
+          _.has(res, "data.data")
+        );
+        const orders = ordersResponses.map((res) => res.data.data);
+
+        const priceResponses = responses.filter((res) =>
+          _.has(res, "data.price")
+        );
+        const prices = priceResponses.map(
+          (res) => res.data.price - res.data.price * 0.001
+        );
+        // const rateResponses = responses.filter((res) =>
+        //   _.has(res, "data.rate")
+        // );
+        // const rates = rateResponses.map((res) => res.data.rate);
+
+        _setRecordsMap(_.flatten(orders), [1, ...prices], [1, ...prices]);
+      });
   }, []);
 
   return (
     <div className="flex">
       {Array.from(recordsMap).map((entry) => {
         const [asset, _entry] = entry;
-        const { rate, records } = _entry;
+        const { rate, price, records } = _entry;
         return (
           <div key={asset}>
-            <div className="text-bold m-2 rounded border-2 border-red-400 p-2 text-center text-xl text-slate-300">
-              {asset} | {rate.toFixed(4)}
+            <div className="text-bold m-2 rounded border-4 border-[#F64670]/60 p-2 text-center text-xl text-[#FCD535]">
+              {asset}
+              <div className="text-lg">
+                <span className="text-[#FCD535]/50">{price.toFixed(4)} </span>
+                <span className="text-[#FCD535]/30">| {rate.toFixed(4)}</span>
+              </div>
             </div>
             <div className="flex flex-col">
               {records
-                .filter((_, i) => i < 6)
+                .filter((_, i) => i < 5)
                 .map((record) => (
-                  <RecordCard key={record.advNo} record={record} rate={rate} />
+                  <RecordCard
+                    key={record.advNo}
+                    record={record}
+                    price={price}
+                    rate={rate}
+                  />
                 ))}
             </div>
           </div>
