@@ -104,34 +104,36 @@ const BinanceP2P = () => {
   }, []);
 
   return (
-    <div className="flex">
-      {Array.from(recordsMap).map((entry) => {
-        const [asset, _entry] = entry;
-        const { rate, price, records } = _entry;
-        return (
-          <div key={asset}>
-            <div className="text-bold m-2 rounded border-4 border-[#F64670]/60 p-2 text-center text-xl text-[#FCD535]">
-              {asset}
-              <div className="text-lg">
-                <span className="text-[#FCD535]/50">{price.toFixed(4)} </span>
-                <span className="text-[#FCD535]/30">| {rate.toFixed(4)}</span>
+    <div className="w-screen flex-1 overflow-auto border-t-2 border-white p-2">
+      <div className="flex">
+        {Array.from(recordsMap).map((entry) => {
+          const [asset, _entry] = entry;
+          const { rate, price, records } = _entry;
+          return (
+            <div key={asset}>
+              <div className="text-bold m-2 rounded border-4 border-[#F64670]/60 p-2 text-center text-xl text-[#FCD535]">
+                {asset}
+                <div className="text-lg">
+                  <span className="text-[#FCD535]/50">{price.toFixed(4)} </span>
+                  <span className="text-[#FCD535]/30">| {rate.toFixed(4)}</span>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                {records
+                  .filter((_, i) => i < 5)
+                  .map((record) => (
+                    <RecordCard
+                      key={record.advNo}
+                      record={record}
+                      price={price}
+                      rate={rate}
+                    />
+                  ))}
               </div>
             </div>
-            <div className="flex flex-col">
-              {records
-                .filter((_, i) => i < 5)
-                .map((record) => (
-                  <RecordCard
-                    key={record.advNo}
-                    record={record}
-                    price={price}
-                    rate={rate}
-                  />
-                ))}
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
