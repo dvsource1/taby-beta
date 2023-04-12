@@ -46,7 +46,6 @@ const BinanceP2P = () => {
     });
 
     setRecordsMap(newMap);
-    console.log(newMap);
   };
 
   useEffect(() => {
@@ -82,7 +81,6 @@ const BinanceP2P = () => {
     axios
       .all([...orderRequests, ...priceRequests /*, ...rateRequests*/])
       .then((responses) => {
-        console.log(responses);
         const ordersResponses = responses.filter((res) =>
           _.has(res, "data.data")
         );
