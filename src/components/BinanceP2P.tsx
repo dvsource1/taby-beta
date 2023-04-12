@@ -1,9 +1,9 @@
 import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
+import Record from "../pages/newtab/record";
+import mapRecord from "../pages/newtab/utli";
 import RecordCard from "./RecordCard";
-import Record from "./record";
-import mapRecord from "./utli";
 
 type RecordEntry = {
   records: Record[];

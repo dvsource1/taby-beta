@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import BankCard from "./BankCard";
 import {
   bloombergPlugin,
   cbslPlugin,
   comBankPlugin,
   sampathBankPlugin,
   selanBankPlugin,
-} from "./bank-plugins";
+} from "../plugins/bank-plugins";
+import BankCard from "./BankCard";
 
 const BankInfo = () => {
   const [combank, setCombank] = useState(null);

@@ -1,4 +1,4 @@
-import Record from "./record";
+import Record from "../pages/newtab/record";
 
 const RecordCard = (props: { record: Record; rate: number; price: number }) => {
   const {
