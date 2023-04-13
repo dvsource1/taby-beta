@@ -1,9 +1,9 @@
-import axios from "axios";
-import _ from "lodash";
-import { useEffect, useState } from "react";
-import Record from "../pages/newtab/record";
-import mapRecord from "../pages/newtab/utli";
-import RecordCard from "./RecordCard";
+import axios from 'axios';
+import _ from 'lodash';
+import { useEffect, useState } from 'react';
+import Record from '../pages/newtab/record';
+import mapRecord from '../pages/newtab/utli';
+import RecordCard from './RecordCard';
 
 type RecordEntry = {
   records: Record[];
@@ -11,15 +11,15 @@ type RecordEntry = {
   price: number;
 };
 const ASSETS = [
-  "USDT",
-  "BUSD",
-  "BTC",
-  "ETH",
-  "BNB",
-  "DAI",
-  "ADA",
-  "TRX",
-  "SHIB",
+  'USDT',
+  'BUSD',
+  'BTC',
+  'ETH',
+  'BNB',
+  'DAI',
+  'ADA',
+  'TRX',
+  'SHIB',
 ];
 
 const BinanceP2P = () => {
@@ -54,20 +54,20 @@ const BinanceP2P = () => {
         proMerchantAds: false,
         page: 1,
         rows: 10,
-        payTypes: ["BANK"],
+        payTypes: ['BANK'],
         countries: [],
         publisherType: null,
-        fiat: "LKR",
-        tradeType: "SELL",
+        fiat: 'LKR',
+        tradeType: 'SELL',
         asset,
       };
       return axios.post(
-        "https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search",
+        'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search',
         payload
       );
     });
 
-    const priceRequests = ASSETS.filter((asset) => asset !== "USDT").map(
+    const priceRequests = ASSETS.filter((asset) => asset !== 'USDT').map(
       (asset) =>
         axios.get(`https://api.binance.com/api/v3/avgPrice?symbol=${asset}USDT`)
     );
@@ -82,12 +82,12 @@ const BinanceP2P = () => {
       .all([...orderRequests, ...priceRequests /*, ...rateRequests*/])
       .then((responses) => {
         const ordersResponses = responses.filter((res) =>
-          _.has(res, "data.data")
+          _.has(res, 'data.data')
         );
         const orders = ordersResponses.map((res) => res.data.data);
 
         const priceResponses = responses.filter((res) =>
-          _.has(res, "data.price")
+          _.has(res, 'data.price')
         );
         const prices = priceResponses.map(
           (res) => res.data.price - res.data.price * 0.001

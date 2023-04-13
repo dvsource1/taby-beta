@@ -2,7 +2,7 @@ import {
   UPDATE_COMPLETE_MESSAGE,
   UPDATE_PENDING_MESSAGE,
   UPDATE_REQUEST_MESSAGE,
-} from "../constant";
+} from '../constant';
 
 type UpdatePendingMessage = {
   type: typeof UPDATE_PENDING_MESSAGE;

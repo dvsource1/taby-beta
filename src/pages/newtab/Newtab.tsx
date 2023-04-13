@@ -1,6 +1,6 @@
-import "@pages/newtab/Newtab.css";
-import BankInfo from "../../components/BankInfo";
-import BinanceP2P from "../../components/BinanceP2P";
+import '@pages/newtab/Newtab.css';
+import BankInfo from '../../components/BankInfo';
+import BinanceP2P from '../../components/BinanceP2P';
 
 const Newtab = () => {
   const handleScroll = (e) => {

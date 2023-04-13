@@ -1,2 +1,2 @@
-const COIN_API = "<---------->"; // https://www.coinapi.io/ API key
+const COIN_API = '<---------->'; // https://www.coinapi.io/ API key
 export default COIN_API;

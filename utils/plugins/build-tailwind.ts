@@ -1,8 +1,8 @@
-import { PluginOption } from "vite";
+import { PluginOption } from 'vite';
 
 export default function buildTailwind(): PluginOption {
   return {
-    name: "build-tailwindcss",
+    name: 'build-tailwindcss',
     renderDynamicImport() {
       return {
         left: `
@@ -10,7 +10,7 @@ export default function buildTailwind(): PluginOption {
           const dynamicImport = (path) => import(path);
           dynamicImport(
           `,
-        right: ")}",
+        right: ')}',
       };
     },
   };

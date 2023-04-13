@@ -1,4 +1,4 @@
-import Record from "./record";
+import Record from './record';
 
 export default function mapRecord(ad): Record {
   const { adv: advertisement, advertiser } = ad;

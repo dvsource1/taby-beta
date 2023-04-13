@@ -2,16 +2,16 @@ import {
   ArrowDownOnSquareIcon,
   ArrowUpOnSquareIcon,
   BeakerIcon,
-} from "@heroicons/react/24/solid";
-import "@pages/popup/Popup.css";
-import _ from "lodash";
+} from '@heroicons/react/24/solid';
+import '@pages/popup/Popup.css';
+import _ from 'lodash';
 
 const Popup = () => {
   const closeAll = () => {
     chrome.tabs.query({}, (tabs) => {
       _.forEach(tabs, (tab: chrome.tabs.Tab) => {
         if (tab.active) {
-          chrome.tabs.update(tab.id, { url: "chrome://newtab" });
+          chrome.tabs.update(tab.id, { url: 'chrome://newtab' });
         } else {
           chrome.tabs.remove(tab.id);
         }

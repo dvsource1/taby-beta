@@ -1,4 +1,4 @@
-import Record from "../pages/newtab/record";
+import Record from '../pages/newtab/record';
 
 const RecordCard = (props: { record: Record; rate: number; price: number }) => {
   const {
@@ -17,7 +17,7 @@ const RecordCard = (props: { record: Record; rate: number; price: number }) => {
         {fiatSymbol}. {fiatPrice}
       </p>
       <i className="text-[#EAECEF]">
-        {(+fiatPrice / props.price).toFixed(4)} |{" "}
+        {(+fiatPrice / props.price).toFixed(4)} |{' '}
         <span className="text-[#EAECEF]/80">
           {(+fiatPrice / props.rate).toFixed(4)}
         </span>
@@ -27,7 +27,7 @@ const RecordCard = (props: { record: Record; rate: number; price: number }) => {
       </p>
       <p className="text-base text-slate-400"></p>
       <p className="text-sm italic text-[#0ECB81]">
-        {nickName}{" "}
+        {nickName}{' '}
         <span className="text-[#0ECB81]/60">
           (~{+monthFinishRate.toFixed(2) * 100}%/
           {monthOrderCount})

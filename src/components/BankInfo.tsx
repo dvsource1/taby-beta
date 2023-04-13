@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   bloombergPlugin,
   cbslPlugin,
   comBankPlugin,
   sampathBankPlugin,
   selanBankPlugin,
-} from "../plugins/bank-plugins";
-import BankCard from "./BankCard";
+} from '../plugins/bank-plugins';
+import BankCard from './BankCard';
 
 const BankInfo = () => {
   const [combank, setCombank] = useState(null);
@@ -27,11 +27,11 @@ const BankInfo = () => {
 
   return (
     <div className="flex h-32 w-screen justify-between p-2">
-      <BankCard name={"COMBANK"} rate={combank} />
-      <BankCard name={"SELAN"} rate={selan} />
-      <BankCard name={"SAMPATH"} rate={sampath} />
-      <BankCard name={"Bloomberg"} rate={bloomberg} />
-      <BankCard name={"CBSL"} pre={cbsl} />
+      <BankCard name={'COMBANK'} rate={combank} />
+      <BankCard name={'SELAN'} rate={selan} />
+      <BankCard name={'SAMPATH'} rate={sampath} />
+      <BankCard name={'Bloomberg'} rate={bloomberg} />
+      <BankCard name={'CBSL'} pre={cbsl} />
     </div>
   );
 };
